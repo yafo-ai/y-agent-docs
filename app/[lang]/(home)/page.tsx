@@ -461,10 +461,10 @@ Y-Agent-Studio-Lancher.exe
         </p>
 
         <div className="mt-4 flex flex-row flex-wrap items-center gap-8">
-          <a href="https://github.com/y-agent-ai" rel="noreferrer noopener">
+          <a href="https://github.com/yafo-ai" rel="noreferrer noopener">
             <GithubLogo className="h-auto w-32" />
           </a>
-          <a href="https://gitee.com/y-agent-ai" rel="noreferrer noopener">
+          <a href="https://gitee.com/yafo-ai" rel="noreferrer noopener">
             <GiteeLogo className="h-auto w-32" />
           </a>
         </div>
