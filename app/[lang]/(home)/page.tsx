@@ -439,10 +439,10 @@ function Introduction(): React.ReactElement {
             code={`
 下载启动器
 
-## 仅支持Windows系统
-
 运行：
 Y-Agent-Studio-Lancher.exe
+
+## 仅支持Windows系统
           />
 `}
           />
