@@ -9,8 +9,7 @@ unzip y-agent-docs-main.zip
 # 或者从github克隆
 git clone https://github.com/yafo-ai/y-agent-docs.git
 # 安装文档依赖
-npm install -g next
-cd y-agent-docs-main
+cd y-agent-docs
 npm install 
 # 启动
 npm run dev
