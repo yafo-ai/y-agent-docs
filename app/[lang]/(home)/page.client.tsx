@@ -22,7 +22,7 @@ import MainImg4 from './main4.png';
 import { cva } from 'class-variance-authority';
 
 export function CreateAppAnimation() {
-  const installCmd = 'git clone https://github.com/y-agent-ai/Y-Agent-docs.git';
+  const installCmd = 'git clone https://github.com/yafo-ai/y-agent-docs.git';
   const tickTime = 100;
   const timeCommandEnter = installCmd.length;
   const timeCommandRun = timeCommandEnter + 3;
