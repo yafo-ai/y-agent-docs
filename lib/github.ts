@@ -1,8 +1,8 @@
 import { App, Octokit } from 'octokit';
 import type { ActionResponse, Feedback } from '@/components/rate';
 
-export const repo = 'Y-Agent-docs';
-export const owner = 'y-agent-ai';
+export const repo = 'y-agent-docs';
+export const owner = 'yafo-ai';
 export const DocsCategory = 'Docs Feedback';
 
 let instance: Octokit | undefined;
