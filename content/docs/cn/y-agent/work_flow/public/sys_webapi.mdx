@@ -1,0 +1,451 @@
+---
+title: 调用系统webapi
+---
+
+
+## 内部API接口：
+
+您可以通过`http://ip:port/docs`查询Y-Agent系统的swagger文档
+
+>注意调用相关业务接口前，需要先登录获取token，请根据swagger文档说明调试接口。
+
+登录获取token：系统外部可以通过登录接口`/api/authorize/login`获取用户token，token有效期自行在系统设置中配置。
+
+调用API接口：系统外部调用API接口时，需要通过headers 请求头传入authorization进行授权`{"authorization":"Bearer token"}`
+
+API调用案例
+
+
+<Tabs items={["Python", "Java", 'C#', 'JS']}>
+
+    <Tab value='Python'>
+ ```python
+import requests
+import json
+
+# 基础URL
+BASE_URL = "http://your-api-domain.com"
+
+def login():
+    """登录获取token"""
+    url = f"{BASE_URL}/api/authorize/login"
+    payload = {
+        "username": "your_username",
+        "password": "your_password"
+    }
+    
+    try:
+        response = requests.post(url, json=payload)
+        response.raise_for_status()  # 检查请求是否成功
+        
+        # 假设返回的token在response.json()["token"]中
+        token_data = response.json()
+        return token_data.get("token")
+    except requests.exceptions.RequestException as e:
+        print(f"登录失败: {e}")
+        return None
+
+def get_goods_list(token, page_index=1, page_size=30, sku=None):
+    """使用POST方式获取商品列表"""
+    if not token:
+        print("未提供Token，无法调用接口")
+        return None
+
+    url = f"{BASE_URL}/api/goods/paged"
+    
+    # 请求头，包含授权信息
+    headers = {
+        "authorization": f"Bearer {token}",
+        "Content-Type": "application/json"  # 明确指定内容类型为JSON
+    }
+    
+    # 请求体，包含分页和筛选参数
+    payload = {
+        "pageindex": page_index,
+        "pagesize": page_size
+    }
+    
+    # 如果sku参数提供了，则添加到请求体中
+    if sku:
+        payload["sku"] = sku
+        
+    try:
+        # 发送POST请求，并将参数字典作为JSON传递给body
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()  # 检查请求是否成功
+        
+        # 返回解析后的JSON数据
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"获取商品列表失败: {e}")
+        # 打印错误详情，有助于调试
+        if e.response is not None:
+            print(f"状态码: {e.response.status_code}")
+            print(f"响应内容: {e.response.text}")
+        return None
+
+# --- 使用示例 ---
+if __name__ == "__main__":
+    # 1. 登录获取Token
+    auth_token = login()
+    
+    if auth_token:
+        print(f"成功获取Token: {auth_token[:20]}...") # 只打印Token的一部分
+        
+        # 2. 使用Token调用获取商品列表的接口
+        goods_data = get_goods_list(token=auth_token, page_index=1, page_size=10, sku="100212554915")
+        
+        if goods_data:
+            print("\n成功获取商品列表:")
+            # 使用json.dumps美化输出JSON
+            print(json.dumps(goods_data, indent=4, ensure_ascii=False))
+        else:
+            print("\n获取商品列表失败。")
+    else:
+        print("登录失败，程序终止。")
+
+
+
+```
+
+    </Tab>
+
+    <Tab value='Java'>
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+
+public class ApiClient {
+
+    private static final String BASE_URL = "http://your-api-domain.com";
+    private static String authToken = null;
+
+    // 登录方法 (与之前相同)
+    public static void login() throws IOException {
+        String url = BASE_URL + "/api/authorize/login";
+        URL obj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+
+        // 设置请求属性
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setDoOutput(true);
+
+        // 创建请求体
+        String jsonInputString = "{\"username\": \"your_username\", \"password\": \"your_password\"}";
+
+        // 发送请求
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+
+        // 获取响应
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                // 简单解析token，实际应用中应使用JSON库如Gson或Jackson
+                String responseBody = response.toString();
+                authToken = responseBody.split("\"")[3]; // 假设返回格式为 {"token":"..."}
+                System.out.println("成功获取Token: " + authToken.substring(0, 20) + "...");
+            }
+        } else {
+            System.out.println("登录失败，响应码: " + responseCode);
+        }
+    }
+
+    // 获取商品列表方法 (修改为POST)
+    public static void getGoodsList(int pageIndex, int pageSize, String sku) throws IOException {
+        if (authToken == null) {
+            System.out.println("未登录，请先调用login()方法。");
+            return;
+        }
+
+        String url = BASE_URL + "/api/goods/paged";
+        URL obj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+
+        // 设置请求属性
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("authorization", "Bearer " + authToken);
+        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setDoOutput(true); // 表示我们要发送请求体
+
+        // 创建JSON请求体
+        String jsonInputString = String.format(
+            "{\"pageindex\": %d, \"pagesize\": %d%s}",
+            pageIndex, pageSize, (sku != null && !sku.isEmpty()) ? ", \"sku\": \"" + sku + "\"" : ""
+        );
+        
+        System.out.println("发送的请求体: " + jsonInputString);
+
+        // 发送POST请求
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+
+        // 获取响应
+        int responseCode = connection.getResponseCode();
+        System.out.println("POST '" + url + "' 的响应码: " + responseCode);
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("\n成功获取商品列表:");
+                System.out.println(response.toString());
+            }
+        } else {
+            System.out.println("获取商品列表失败。");
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
+                StringBuilder errorResponse = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    errorResponse.append(responseLine.trim());
+                }
+                System.out.println("错误详情: " + errorResponse.toString());
+            }
+        }
+    }
+
+    // --- 使用示例 ---
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            // 1. 登录
+            login();
+
+            // 2. 调用获取商品列表
+            if (authToken != null) {
+                getGoodsList(1, 10, "100212554915");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+```
+
+
+    </Tab>
+    <Tab value='C#'>
+```csharp
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json; // 需要安装 Newtonsoft.Json NuGet包
+
+public class ApiClient
+{
+    private static readonly HttpClient client = new HttpClient();
+    private static string authToken;
+    private const string BaseUrl = "http://your-api-domain.com";
+
+    static ApiClient()
+    {
+        // 设置基础地址，方便后续调用
+        client.BaseAddress = new Uri(BaseUrl);
+        // 设置默认的请求头
+        client.DefaultRequestHeaders.Accept.Clear();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    }
+
+    // 登录获取Token (与之前相同)
+    public static async Task LoginAsync()
+    {
+        var loginData = new { username = "your_username", password = "your_password" };
+        var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
+
+        try
+        {
+            HttpResponseMessage response = await client.PostAsync("/api/authorize/login", content);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            // 使用Newtonsoft.Json解析Token
+            dynamic tokenData = JsonConvert.DeserializeObject(responseBody);
+            authToken = tokenData.token;
+            Console.WriteLine($"成功获取Token: {authToken.Substring(0, 20)}...");
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"登录失败: {e.Message}");
+        }
+    }
+
+    // 获取商品列表 (修改为POST)
+    public static async Task GetGoodsListAsync(int pageIndex = 1, int pageSize = 30, string sku = null)
+    {
+        if (string.IsNullOrEmpty(authToken))
+        {
+            Console.WriteLine("未提供Token，无法调用接口。");
+            return;
+        }
+
+        // 清除旧的Authorization头，然后设置新的
+        client.DefaultRequestHeaders.Remove("authorization");
+        client.DefaultRequestHeaders.Add("authorization", $"Bearer {authToken}");
+
+        // 创建请求体对象
+        var requestData = new { pageindex = pageIndex, pagesize = pageSize, sku };
+        
+        // 将对象序列化为JSON字符串，并创建StringContent
+        var jsonPayload = JsonConvert.SerializeObject(requestData);
+        var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+        try
+        {
+            // 发送POST请求
+            HttpResponseMessage response = await client.PostAsync("/api/goods/paged", content);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("\n成功获取商品列表:");
+            // 格式化输出JSON
+            Console.WriteLine(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(responseBody), Formatting.Indented));
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"获取商品列表失败: {e.Message}");
+            // 尝试读取错误响应内容
+            if (e.StatusCode.HasValue)
+            {
+                var errorResponse = await e.Response.Content.ReadAsStringAsync();
+                Console.WriteLine($"错误详情: {errorResponse}");
+            }
+        }
+    }
+
+    // --- 使用示例 ---
+    public static async Task Main(string[] args)
+    {
+        // 1. 登录
+        await LoginAsync();
+
+        // 2. 调用获取商品列表
+        if (!string.IsNullOrEmpty(authToken))
+        {
+            await GetGoodsListAsync(pageIndex: 1, pageSize: 10, sku: "100212554915");
+        }
+        
+        // 等待用户输入，防止控制台窗口关闭
+        Console.WriteLine("\n按任意键退出...");
+        Console.ReadKey();
+    }
+}
+
+```
+
+    </Tab>
+    <Tab value='JS'>
+```js
+// 基础URL
+const BASEURL = "http://your-api-domain.com";
+
+// 存储获取到的 token
+let authToken = null;
+
+/**
+ * 登录获取 token (使用 axios)
+ */
+async function loginWithAxios() {
+  const url = `${BASEURL}/api/authorize/login`;
+  const payload = {
+    username: "yourusername",
+    password: "yourpassword"
+  };
+
+  try {
+    // axios 会自动将 payload 对象转换为 JSON 并设置 Content-Type 头
+    const response = await axios.post(url, payload);
+    
+    console.log("登录成功，获取到 token:", response.data.token);
+    
+    // 假设 token 在返回对象的 token 字段中
+    authToken = response.data.token;
+    return authToken;
+
+  } catch (error) {
+    // axios 会自动为 HTTP 错误状态码抛出错误
+    // 错误信息通常在 error.response.data 中
+    console.error("登录请求出错:", error.response ? error.response.data : error.message);
+    return null;
+  }
+}
+
+/**
+ * 使用 POST 方式获取商品列表 (使用 axios)
+ */
+async function getGoodsListWithAxios() {
+  if (!authToken) {
+    console.error("未获取到授权 token，请先登录。");
+    return;
+  }
+
+  const url = `${BASEURL}/api/goods/paged`;
+  const payload = {
+    pageindex: 1,
+    pagesize: 30,
+    sku: "100212554915"
+  };
+
+  try {
+    const response = await axios.post(url, payload, {
+      headers: {
+        // axios 会自动处理 Content-Type，我们只需添加授权头
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    console.log("获取商品列表成功:", response.data);
+    return response.data;
+
+  } catch (error) {
+    console.error("获取商品列表请求出错:", error.response ? error.response.data : error.message);
+    return null;
+  }
+}
+
+// --- 调用示例 ---
+(async () => {
+  await loginWithAxios();
+  if (authToken) {
+    await getGoodsListWithAxios();
+  }
+})();
+
+```
+    </Tab>
+
+
+</Tabs>
+
+
+
+
+## 内部API转API工具插件
+
+您可以根据需要把内部的API接口配置成API插件工具，具体配置请参考【插件工具】
+

@@ -1,0 +1,20 @@
+
+# 安装 nodejs
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash - && sudo yum install -y nodejs
+#  安装 unzip
+sudo yum install -y unzip
+# 解压
+unzip y-agent-docs-main.zip
+
+# 或者从github克隆
+git clone https://github.com/yafo-ai/y-agent-docs.git
+# 安装文档依赖
+npm install -g next
+cd y-agent-docs-main
+npm install 
+# 启动
+npm run dev
+
+# 正式环境 
+npm run build
+npm start

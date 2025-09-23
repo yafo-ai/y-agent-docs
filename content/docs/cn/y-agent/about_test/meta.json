@@ -1,0 +1,11 @@
+{
+    "title": "测试",
+    "description": "yagent",
+    "defaultOpen": true,
+    "pages": [
+        "add_test",
+        "test_kind",
+        "test_plan",
+        "test_report"
+    ]
+}

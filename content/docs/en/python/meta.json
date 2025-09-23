@@ -1,0 +1,12 @@
+{
+    "title": "Python",
+    "description": "Python programming language tutorials",
+    "root": true,
+    "icon": "Airplay",
+    "pages": [
+        "---beginner---",
+        "beginner",
+        "---advanced---",
+        "advanced"
+    ]
+  }

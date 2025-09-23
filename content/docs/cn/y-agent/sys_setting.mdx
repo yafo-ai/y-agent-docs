@@ -1,0 +1,104 @@
+---
+title: 系统设置
+description: 中文描述
+---
+
+
+## 系统设置
+
+### 基础系统设置
+基础系统设置，存放在 `./server_config.py` 文件中。
+
+配置参数说明
+| 参数名 | 必填 | 说明 | 约束条件 |
+|--------|------|------|----------|
+| fastapi_host | 是 | 项目启动时绑定的主机IP | - |
+| fastapi_port | 是 | 项目启动时绑定端口 | 必须为大于50小于65534的整数 |
+| db_connect_str | 是 | 数据库连接字符串 | 系统运行需要一个关系型数据库支持 |
+| is_record_operationlog | 是 | 是否记录操作日志 | - |
+| web_name | 否 | 项目名称 | - |
+| web_desc | 否 | 项目说明 | - |
+
+修改后需重启服务端。
+
+### 知识库配置
+首先，系统会先按照一级标题和二级标题进行切分。[请参考切分规则](/docs/y-agent/knowledge_base/text_doc#2-手工录入)
+切块大小：当单个文档过大的时候，系统会进行切分，按照字符个数，切分成此大小的块。
+重叠大小：当前文档被切分后，两个相邻文档的重叠区域。
+所有的大小都是指字符长度。
+
+### 向量数据库配置
+向量数据库配置:
+
+案例：
+Chroma
+
+Milvus
+
+Faiss
+
+### 向量模型配置 
+> 注意!修改向量模型后会造成已经生成的所有向量失效，请谨慎操作!
+
+参考案例：
+<Cards>
+
+<Card title="设置vllm向量">
+模型接口格式：vllm
+
+模型名称：bge-m3
+
+API接口地址：http://192.168.50.225:8001/v1/embeddings
+
+APIKEY：留空
+
+</Card>
+
+
+<Card title="设置智谱向量">
+模型接口格式：vllm
+
+模型名称：embedding-3
+
+API接口地址：https://open.bigmodel.cn/api/paas/v4/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+
+<Card title="设置火山向量">
+模型接口格式：vllm
+
+模型名称：doubao-embedding-text-240715
+
+API接口地址：https://ark.cn-beijing.volces.com/api/v3/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+<Card title="设置openai向量">
+
+模型接口格式：vllm
+
+模型名称：text-embedding-ada-002
+
+API接口地址： https://api.openai.com/v1/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+</Cards>
+
+...
+
+### 安全配置
+建议，过期时间大于3天，刷新时间大于2天。
+
+令牌过期时间：
+令牌刷新时间：
+> 说明：当用户通过登录界面登录后，登录的有效期是 `令牌过期时间`，如果用户在过期前，且剩余过期时间小于 令牌刷新时间，
+进行任何操作，系统都会重新分配令牌，将过期时间重置为 完整的过期时间。具体参考JWT授权机制。
+

@@ -1,0 +1,300 @@
+---
+title: Python for Beginners
+description: A comprehensive guide to getting started with Python programming
+icon: Squirrel
+---
+
+# Python for Beginners
+
+This guide will help you start your journey with Python programming. Python is known for its simplicity and readability, making it an excellent first programming language.
+
+## Table of Contents
+
+- [Setting Up Python](#setting-up-python)
+- [Python Basics](#python-basics)
+- [Data Types](#data-types)
+- [Control Flow](#control-flow)
+- [Functions](#functions)
+- [Working with Files](#working-with-files)
+- [Next Steps](#next-steps)
+
+## Setting Up Python
+
+### Installation
+
+1. **Download Python**: Visit [python.org](https://www.python.org/downloads/) and download the latest version for your operating system.
+2. **Install Python**: Run the installer and make sure to check "Add Python to PATH" before clicking Install.
+3. **Verify Installation**: Open Command Prompt (Windows) or Terminal (Mac/Linux) and type:
+
+```
+python --version
+```
+
+You should see the Python version number if installation was successful.
+
+### Choosing an Editor
+
+You have several options:
+
+- **IDLE**: Comes bundled with Python, good for beginners
+- **VS Code**: Free, powerful editor with excellent Python support
+- **PyCharm**: Full-featured Python IDE (free Community Edition available)
+
+## Python Basics
+
+### Your First Program
+
+Create a file named `hello.py` and add this code:
+
+```python
+print("Hello, World!")
+```
+
+Run it from the command line:
+
+```
+python hello.py
+```
+
+### Variables and Assignment
+
+```python
+# Variables don't need to be declared with a type
+name = "John"
+age = 30
+height = 5.9
+
+# You can print variables easily
+print(name)
+print(f"Age: {age}, Height: {height}")
+```
+
+### User Input
+
+```python
+name = input("Enter your name: ")
+print(f"Hello, {name}!")
+
+# Input returns strings, so convert for numbers
+age = int(input("Enter your age: "))
+print(f"Next year, you'll be {age + 1} years old.")
+```
+
+## Data Types
+
+### Numbers
+
+```python
+# Integers
+x = 5
+y = -10
+
+# Floating point
+pi = 3.14159
+e = 2.71828
+
+# Basic operations
+sum = x + y
+product = x * y
+quotient = pi / 2
+exponent = 2 ** 3  # 2 raised to the power of 3 (equals 8)
+```
+
+### Strings
+
+```python
+greeting = "Hello"
+name = "Python"
+
+# String concatenation
+message = greeting + ", " + name + "!"
+print(message)  # Hello, Python!
+
+# String methods
+print(name.upper())  # PYTHON
+print(message.lower())  # hello, python!
+print(len(message))  # 14 (length of string)
+```
+
+### Lists
+
+```python
+# A list can contain mixed types
+fruits = ["apple", "banana", "cherry"]
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, "hello", 3.14, True]
+
+# Accessing elements (zero-indexed)
+print(fruits[0])  # apple
+print(fruits[-1])  # cherry (negative indexes count from the end)
+
+# Modifying lists
+fruits.append("orange")  # Add to the end
+fruits.insert(1, "blueberry")  # Insert at position
+fruits.remove("banana")  # Remove by value
+popped = fruits.pop()  # Remove and return the last item
+
+# List slicing
+print(numbers[1:3])  # [2, 3] (elements from index 1 up to but not including 3)
+```
+
+### Dictionaries
+
+```python
+# Key-value pairs
+person = {
+    "name": "Alice",
+    "age": 25,
+    "job": "Developer"
+}
+
+# Accessing values
+print(person["name"])  # Alice
+
+# Adding or modifying entries
+person["email"] = "alice@example.com"
+person["age"] = 26
+
+# Checking if a key exists
+if "job" in person:
+    print(f"Job: {person['job']}")
+```
+
+## Control Flow
+
+### Conditional Statements
+
+```python
+age = 18
+
+if age < 13:
+    print("Child")
+elif age < 18:
+    print("Teenager")
+else:
+    print("Adult")
+```
+
+### Loops
+
+```python
+# For loop with a list
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(f"I like {fruit}s")
+
+# For loop with a range
+for i in range(5):  # 0 to 4
+    print(i)
+
+# While loop
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+### Break and Continue
+
+```python
+# Break exits the loop entirely
+for i in range(10):
+    if i == 5:
+        break
+    print(i)  # Prints 0 through 4
+
+# Continue skips the rest of the current iteration
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Prints only odd numbers
+```
+
+## Functions
+
+### Defining Functions
+
+```python
+def greet(name):
+    """This function greets the person passed in as a parameter"""
+    return f"Hello, {name}!"
+
+# Calling the function
+message = greet("Python")
+print(message)  # Hello, Python!
+```
+
+### Default Parameters
+
+```python
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+print(greet("Python"))  # Hello, Python!
+print(greet("Python", "Hi"))  # Hi, Python!
+```
+
+### Multiple Return Values
+
+```python
+def calculate(a, b):
+    addition = a + b
+    subtraction = a - b
+    return addition, subtraction
+
+add, sub = calculate(10, 5)
+print(f"10 + 5 = {add}")  # 10 + 5 = 15
+print(f"10 - 5 = {sub}")  # 10 - 5 = 5
+```
+
+## Working with Files
+
+### Reading Files
+
+```python
+# Reading an entire file
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+# Reading line by line
+with open("example.txt", "r") as file:
+    for line in file:
+        print(line.strip())  # strip() removes newline characters
+```
+
+### Writing to Files
+
+```python
+# Writing to a file (overwrites existing content)
+with open("output.txt", "w") as file:
+    file.write("Hello, Python!")
+
+# Appending to a file
+with open("output.txt", "a") as file:
+    file.write("\nLearning file handling.")
+```
+
+## Next Steps
+
+Now that you've learned the basics, here are some suggestions for what to explore next:
+
+1. **Error Handling**: Learn about try/except blocks
+2. **Modules and Packages**: Import and use external code
+3. **Object-Oriented Programming**: Classes and objects in Python
+4. **Data Science Libraries**: Pandas, NumPy, Matplotlib
+5. **Web Development**: Flask or Django frameworks
+
+## Practice Projects
+
+The best way to learn is by doing. Try these beginner projects:
+
+1. **To-Do List App**: Store and manage a list of tasks
+2. **Simple Calculator**: Build a calculator with basic operations
+3. **Password Generator**: Create random, secure passwords
+4. **Weather App**: Fetch and display weather data using an API
+5. **Text-Based Game**: Create a simple adventure game
+
+---
+
+Happy coding! Remember that programming is a skill that improves with practice. Don't be afraid to experiment and learn from your mistakes. 

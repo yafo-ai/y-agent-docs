@@ -1,0 +1,16 @@
+{
+    "title": "强化学习",
+    "description": "yagent",
+    "defaultOpen": true,
+    "pages": [
+        "concept",
+        "generic_process",
+        "wf_nodes",
+        "prompt_guide",
+        "flow_log",
+        "debug_flow",
+        "release_flow",
+        "model_setting",
+        "about_error"
+    ]
+}

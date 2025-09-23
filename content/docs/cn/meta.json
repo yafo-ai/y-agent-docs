@@ -1,0 +1,23 @@
+{
+    "title": "中文测试",
+    "description": "测试模块描述",
+    "root": true,
+    "icon": "Airplay",
+    "pages": [
+        "---介绍---",
+        "markdown",
+        "no_time_read_this",
+        "index",
+        "---Y-Agent---",
+        "y-agent",
+        "---Y-Trainer---",
+        "y-trainer",
+        "---Y-Squeeze---",
+        "y-squeeze",
+        "---Y-Retriever---",
+        "y-retriever",        
+        "license",
+        "future",
+        "business_cooperation"
+    ]
+  }

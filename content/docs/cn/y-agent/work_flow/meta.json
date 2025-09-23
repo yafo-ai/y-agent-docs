@@ -1,0 +1,18 @@
+{
+    "title": "工作流",
+    "description": "yagent",
+    "defaultOpen": true,
+    "pages": [
+        "concept",
+        "generic_process",
+        "wf_nodes",
+        "prompt_guide",
+        "flow_log",
+        "debug_flow",
+        "share_flow",
+        "import_export_wf",
+        "model_setting",
+        "tips",
+        "about_error"
+    ]
+}

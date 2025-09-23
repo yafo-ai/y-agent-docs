@@ -1,0 +1,285 @@
+---
+title: MD语法
+description: aaa
+---
+
+
+# 字体
+
+**加粗**,
+斜体
+*斜体*
+_斜体_
+
+`标签`
+
+~~删除线~~
+
+^上标文本^
+~下标文本~
+
+
+
+1. First
+2. Second
+3. Third
+
+- Item 1
+- Item 2
+
+> 引用
+
+
+注意
+
+```
+<Callout>注意</Callout>
+
+<Callout title="Title">Hello World</Callout>
+<Callout title="Title" type="error">
+  Hello World
+</Callout>
+```
+
+<Callout>注意</Callout>
+
+<Callout title="Title">Hello World</Callout>
+<Callout title="Title" type="error">
+  Hello World
+</Callout>
+
+[My Link](https://github.github.com/gfm)
+```js
+
+**加粗**,
+斜体
+*斜体*
+_斜体_
+
+`标签`
+
+~~删除线~~
+
+^上标文本^
+~下标文本~
+
+
+
+1. First
+2. Second
+3. Third
+
+- Item 1
+- Item 2
+
+> 引用
+
+链接：
+[文档](URL).
+
+```
+
+<Banner id="hello-world">Hello World</Banner>
+<Banner variant="rainbow">Hello World</Banner>
+
+```js
+
+<Banner id="hello-world">Hello World</Banner>
+<Banner variant="rainbow">Hello World</Banner>
+<Banner changeLayout={false}>Hello World</Banner>
+```
+# 图片
+插入图片
+``` js
+![alt](/imgs/cn/work_flow.png)
+```
+
+插入Icon
+{<CirclePlay className="text-blue-300" />} 
+{<CirclePlay className="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground size-4 text-fd-muted-foreground" />} 
+```js
+{<CirclePlay className="text-blue-300" />} 
+{<CirclePlay className="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground size-4 text-fd-muted-foreground" />} 
+```
+
+插入图片
+
+<img src="./imgs/image.png" alt="icon" />
+![alt 文本](./imgs/flow_chart.png)
+带背景
+<Wrapper>
+![彩虹背景](./imgs/flow_chart.png)
+</Wrapper>
+
+按照图片原始大小插入
+```html
+<div className="not-prose grid gap-2 *:border max-sm:*:last:hidden sm:grid-cols-[2fr_1fr]">
+
+<>![Nav](./imgs/image.png)</>
+
+<>![Banner](./imgs/image.png)</>  第二张只占1/4
+
+</div>
+图片居中显示
+<div className='flex justify-center items-center *:max-w-[200px] bg-gradient-to-br from-fd-primary/10 rounded-xl border'>
+
+    ![Sidebar](/docs/sidebar.png)
+
+</div>
+```
+
+<div className="not-prose grid gap-2 *:border max-sm:*:last:hidden sm:grid-cols-[2fr_1fr]">
+
+<>![Nav](./imgs/system_architecture.png)</>
+
+<>![Banner](./imgs/system_architecture.png)</>
+
+</div>
+
+
+
+
+## 卡片
+<Cards>
+  <Card title="sys." href="/docs/y-agent/work_flow/prompt_guide#系统函数-sys">触发系统函数提示</Card>
+  <Card title="role." icon={<HomeIcon />}  > aaaa</Card>
+</Cards>
+
+<details>
+<summary>折叠效果1</summary>
+
+| 属性 | 说明 |
+| --- | --- |
+| 模型 | 模型名称 |
+| 角色 | 角色名称 |
+
+</details>
+
+```
+<details>
+<summary>节点属性</summary>
+
+| 属性 | 说明 |
+| --- | --- |
+| 模型 | 模型名称 |
+| 角色 | 角色名称 |
+
+</details>
+  
+```
+
+
+<Accordions>
+  <Accordion id="base-url" title="折叠展示2">
+   折叠展示 title="折叠展示"，id 代表链接地址
+   代码块：
+
+    ```js
+    <Accordions>
+      <Accordion id="base-url" title="折叠展示">
+        折叠展示 title="折叠展示"，id 代表链接地址
+        默认展开 orientation="vertical"  
+      </Accordion>
+
+    </Accordions>
+    ```
+  </Accordion>
+
+</Accordions>
+
+页内导航
+href="/docs/y-agent/work_flow/prompt_guide#系统函数-sys"
+
+## 页签
+
+
+```js tab="提取张三发送的消息"
+  {{sys.chat_room.get_talks("张三","").message}}
+```
+
+```js tab="提取张三接收的消息"
+  {{sys.chat_room.get_talks("","张三").message}}
+```
+
+
+```js   
+markdown表格里面 使用特殊字符例如 |  {，需要加\转义，\| \{
+
+```
+
+
+<Tabs items={["doc", "meta", 'docs']}>
+
+    <Tab value='doc'>
+
+Compile Markdown & MDX files into a React Server Component, with useful properties like **Table of Contents**.
+
+```ts title="source.config.ts"
+import { defineCollections } from 'fumadocs-mdx/config';
+
+export const test = defineCollections({
+  type: 'doc',
+  dir: 'content/docs',
+});
+```
+
+    </Tab>
+
+    <Tab value='meta'>
+
+Transform YAML/JSON files into an array of data.
+
+```ts title="source.config.ts"
+import { defineCollections } from 'fumadocs-mdx/config';
+
+export const test = defineCollections({
+  type: 'meta',
+  dir: 'content/docs',
+});
+```
+
+    </Tab>
+    <Tab value='docs'>
+
+Combination of `meta` and `doc` collections, which is needed for Fumadocs.
+
+```ts title="source.config.ts"
+import { defineDocs } from 'fumadocs-mdx/config';
+
+export const docs = defineDocs({
+  dir: 'content/docs',
+  docs: {
+    // options for `doc` collection
+  },
+  meta: {
+    // options for `meta` collection
+  },
+});
+```
+
+    </Tab>
+
+</Tabs>
+
+
+## 引用其他文件
+```js 
+<include>./test/test.mdx</include>
+```
+
+
+高级用法：
+https://fumadocs.dev/docs/ui/layouts/page#table-of-contents
+
+问题：字体设置不生效、代码块样式不一致、图片大小无法设置、如何设置小号字体？、数学公式、https://v14.fumadocs.dev/docs/ui/twoslash 下拉框
+设置起始页位置、GitHub Edit、favicon.svg徽标
+
+
+
+网站icon徽标的存放目录：
+```
+app\[lang]\docs\icon.png
+```
+
+添加GitHub星星
+https://fumadocs.dev/docs/ui/components/github-info

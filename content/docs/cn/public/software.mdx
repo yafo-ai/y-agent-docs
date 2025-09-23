@@ -1,0 +1,32 @@
+---
+title: 组件
+description: 框架内的组件介绍
+---
+
+
+
+<Cards>
+  <Card icon={<HomeIcon className="text-purple-300" />} title="Y-Agent 核心模块" >
+    支持智能体编排、RAG、流程日志、单元测试、流程测试、语料生产等功能。
+
+    智能体编排可以在同一个流程中，同时支持多智能体协作和流程混合编排。语料生产部分功能需要Y-Squeeze支持。
+    [文档](/docs/y-agent/introduction).
+  </Card>
+  <Card icon={<PanelsTopLeft className="text-blue-300" />} title="Y-Trainer 训练框架 10月开源" >
+    与Y-Agent无缝集成，支持预训练、指令微调、强化学习。
+
+    与传统SFT、DPO、PPO、GRPO等不同，本训练框架在专有任务上，可以有效的避免过拟合、幻觉和复读机问题，同时最大限度保留模型基础能力。
+    [文档](/docs/y-trainer/introduction).
+  </Card>
+  <Card icon={<ArrowBigDown />} title="Y-Squeeze"  >
+    一个利用注意力机制，提供特征提取、聚类、语料分析等功能
+
+    本框架配合Y-Agent可以识别基础模型在专有领域的预训练知识不足问题。
+    [文档](/docs/y-squeeze/introduction).
+  </Card>
+  <Card icon={<CpuIcon />} title="Y-Retriever" >
+    文档召回与压缩
+
+    开发中...
+  </Card>
+</Cards>

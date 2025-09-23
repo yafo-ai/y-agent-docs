@@ -1,0 +1,16 @@
+---
+title: 模型节点属性说明
+---
+
+ 
+| 属性 | 说明 | 必填 |
+| --- | --- | --- |
+| 角色名称 | 角色名称 | 是 |
+| 大模型 | 选择你的大模型 [如何添加模型..](/docs/y-agent/model_setting) | 是 |
+| 角色介绍 | 描述这个角色的职责，如果上游角色需要自动选择下游角色，则需要在这里说明，方便大模型选择 | 是 |
+| 提示词 | 大模型执行任务的提示词 [提示词编写..](/docs/y-agent/work_flow/prompt_guide) | 是 |
+| 输出分身 | 如果模型同时要执行：自动选择下游角色 使用工具  填写参数 中的多个任务，可以开启分身(默认开启)。 [关于输出分身介绍..](/docs/y-agent/work_flow/wf_nodes/model_node#输出分身)  |   |
+| 配置工具 | 给模型添加可用工具。  [自主选择工具..](/docs/y-agent/work_flow/wf_nodes/model_node#工具配置) |   |
+| ReAct推理 | 开启后模型会自动进行多轮推理（本功能和分身不能同时开启）  [ReAct推理配置..](/docs/y-agent/work_flow/wf_nodes/model_node#react推理) |   |
+| 自动选择下游角色 | 开启后模型会自动选择下一步执行任务的节点，可以是多个也可以是一个  [自动选择下游角色..](/docs/y-agent/work_flow/wf_nodes/model_node#下游角色) |   |
+| 存储变量 | 当需要模型输出变量时，可以添加并编写变量名称和描述  [输出变量..](/docs/y-agent/work_flow/wf_nodes/model_node#变量存储) |  |

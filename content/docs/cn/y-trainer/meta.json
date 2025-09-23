@@ -1,0 +1,9 @@
+{
+    "title": "说明文档",
+    "description": "Training 教程",
+    "icon": "Airplay",
+    "pages": [
+        "introduction",
+        "advanced"
+    ]
+  }

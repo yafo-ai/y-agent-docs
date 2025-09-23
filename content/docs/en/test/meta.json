@@ -1,0 +1,13 @@
+{
+    "title": "test",
+    "description": "test des",
+    "root": true,
+    "icon": "Airplay",
+    "pages": [
+        "components",
+        "---test---",
+        "test",
+        "---test1---",
+        "test1"
+    ]
+  }

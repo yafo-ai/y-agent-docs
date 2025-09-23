@@ -1,0 +1,86 @@
+.shiki:not(.not-fumadocs-codeblock *) {
+  --padding-left: calc(var(--spacing) * 3);
+  --padding-right: calc(var(--spacing) * 3);
+
+  code span {
+    color: var(--shiki-light);
+  }
+
+  code .line {
+    position: relative;
+    min-height: 1lh;
+    padding-left: var(--padding-left);
+    padding-right: var(--padding-right);
+  }
+
+  &.has-focused code .line:not(.focused) {
+    filter: blur(2px);
+    transition: filter 200ms;
+  }
+
+  &.has-focused:hover code .line:not(.focused) {
+    filter: blur(0);
+  }
+
+  &[data-line-numbers] code .twoslash-meta-line {
+    padding-left: calc(var(--padding-left) + 7 * var(--spacing));
+  }
+
+  &[data-line-numbers] code .line {
+    counter-increment: line;
+    padding-left: calc(var(--padding-left) + 7 * var(--spacing));
+
+    &::after {
+      position: absolute;
+      content: counter(line);
+      color: color-mix(
+        in oklab,
+        var(--fd-counter-color, var(--color-fd-muted-foreground)) 60%,
+        transparent
+      );
+      @apply top-0 left-4;
+    }
+  }
+
+  code .diff::before {
+    position: absolute;
+    left: var(--spacing);
+  }
+
+  code .diff.remove {
+    opacity: 0.7;
+    --fd-counter-color: var(--color-fd-diff-remove-symbol);
+    @apply bg-fd-diff-remove;
+  }
+
+  code .diff.remove::before {
+    content: '-';
+    @apply text-fd-diff-remove-symbol;
+  }
+
+  code .diff.add {
+    --fd-counter-color: var(--color-fd-diff-add-symbol);
+    @apply bg-fd-diff-add;
+  }
+
+  code .diff.add::before {
+    content: '+';
+    @apply text-fd-diff-add-symbol;
+  }
+
+  code .highlighted {
+    --fd-counter-color: var(--color-fd-primary);
+    @apply bg-fd-primary/10;
+  }
+
+  code .highlighted-word {
+    padding: 1px;
+    @apply border -my-px border-fd-primary/30 bg-fd-primary/10 rounded-md font-medium;
+  }
+}
+
+.dark .shiki:not(.not-fumadocs-codeblock *) {
+  code span {
+    color: var(--shiki-dark);
+  }
+}

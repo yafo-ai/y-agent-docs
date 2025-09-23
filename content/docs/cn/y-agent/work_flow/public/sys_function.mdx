@@ -1,0 +1,15 @@
+---
+title: 系统内置工具
+---
+
+系统内置的函数有：
+
+```python  
+command=|<|notify(message="向用户发送消息。")|>|
+command=|<|terminate(message="向用户发送消息并终止流程。")|>|
+command=|<|write_var(ids=[{{}}])|>| # 写变量
+
+# 选择下游角色 并分配任务 
+command=|<|assignment(next_roles=[{"role":"角色1","message":"消息1"},{"role":"角色2","message":"消息2"}]) |>| 
+command=|<|send_message(role="角色1",message="向其他角色发消息")|>| # 向其他角色发消息
+```

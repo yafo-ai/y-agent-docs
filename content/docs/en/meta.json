@@ -1,0 +1,12 @@
+{
+    "title": "中文测试",
+    "description": "测试模块描述",
+    "root": true,
+    "icon": "Airplay",
+    "pages": [
+        "---介绍---",
+        "test",
+       
+        "(api)"
+    ]
+  }

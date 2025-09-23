@@ -1,0 +1,16 @@
+{
+    "title": "说明文档",
+    "description": "Y-Squeeze 教程",
+    "icon": "ArrowBigDown",
+    "pages": [
+        "introduction",
+        "attention",
+        "token_loss",
+        "token_entropy",
+        "compression",
+        "generation",
+        "clustering",
+        "model_knowledge_probe",
+        "corpus_quality"
+    ]
+  }
