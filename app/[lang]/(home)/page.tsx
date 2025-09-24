@@ -123,16 +123,20 @@ async function Why() {
         typeTable={
           <TypeTable
             type={{
-              name: {
-                type: "string",
-                description: "The name of player",
-                default: "hello",
+              预训练: {
+                type: "CPT",
+                description: "在基座模型上继续进行预训练，补充垂直领域知识。",
+                default: "支持",
               },
-              code: {
-                type: "string",
-                description: (
-                  <CodeBlock lang="ts" code='console.log("Hello World")' />
-                ),
+              指令微调: {
+                type: "SFT",
+                description:"在模型上进行微调，提升模型指令跟随能力。",
+                default: "支持",
+              },
+              强化学习: {
+                type: "RL",
+                description:"在微调模型上让模型自主寻找解决问题的路径，提升模型的泛化能力。",
+                default: "支持",
               },
             }}
           />
