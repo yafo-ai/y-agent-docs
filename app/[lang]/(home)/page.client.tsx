@@ -23,6 +23,7 @@ import DemoImg1 from './demo1.png';
 import DemoImg2 from './demo2.png';
 import DemoImg3 from './demo3.png';
 import DemoImg4 from './demo4.png';
+import DemoImg5 from './demo5.png';
 import { cva } from 'class-variance-authority';
 
 export function CreateAppAnimation() {
@@ -144,9 +145,9 @@ export function WhyInteractive(props: {
     '商业客户分析',
     '法律文件审核',
     'HR流程自动化',
-    '管理层助手',
+    '系统自动监控',
     '自动生产语料',
-    '自主模型训练',
+    '集成模型训练',
   ];
 
   return (
@@ -220,57 +221,64 @@ export function WhyInteractive(props: {
         ) : null}
         {active === 4 ? (
           <WhyPanel>
-            <h3>Connect your content and server.</h3>
-
-            <p>
-              React Server Component made it very easy to automate docs. Use
-              server data, server components, and even client components in MDX
-              documents.
-            </p>
-
-            {props.codeblockMdx}
+              <Image src={DemoImg5} alt="preview" priority className="rounded-lg mb-4" />    
           </WhyPanel>
         ) : null}
         {active === 5 ? (
           <WhyPanel>
-            <h3>Connect your content and server.</h3>
+            <h3>支持语料训练集的自动化生成</h3>
+          <p>语料生产在垂直领域的应用非常普遍，但在企业级应用中，往往需要大量的手动工作。</p>
+          <p>Y-Agent 提供了自动化语料生成的能力，通过智能的识别技术，可以自动挖掘模型不知道的知识，
+            并针对性自动生成符合业务需求的语料。</p>
+          
+            <h3>自动化分析</h3>
+          <p>借助套件内的 Y-Squeeze 框架，可以自动分析出模型在处理问题时，缺少的领域知识。</p>
+            <h3>人工方式分析</h3>
+          <p>当发现模型输出不符合预期的时候，点击“添加语料”按钮。</p>
 
-            <p>
-              React Server Component made it very easy to automate docs. Use
-              server data, server components, and even client components in MDX
-              documents.
-            </p>
-
-            {props.codeblockMdx}
+          <p>依靠 生成参考输出 功能，辅助编辑。可以快速生成语料，并将其添加到模型训练集中。 </p>
+            
+            <div className="mt-4 flex flex-row items-center gap-1.5 not-prose">
+              <Link
+                href="/docs/y-agent/demo/auto_add_training_data"
+                className={cn(buttonVariants({ variant: 'primary' ,size: 'sm'}))}
+              >
+                自动生产预训练语料
+              </Link>
+              <Link
+                href="/docs/y-agent/corpus/add_corpus"
+                className={cn(buttonVariants({ variant: 'primary' ,size: 'sm'}))}
+              >
+                手工添加语料
+              </Link>
+            </div>
           </WhyPanel>
         ) : null}
         
         
         {active === 6 ? (
           <WhyPanel>
-            <h3>Never repeat yourself again.</h3>
+            <h3>让模型后训练更加简单.</h3>
             <p>
-              Fumadocs has a smart Type Table component that renders the
-              properties of interface/type automatically, from the source of
-              truth, powered by the TypeScript Compiler API.
+              本套件集成训练框架，支持继续预训练、指令微调、强化学习，能够快速完成模型训练，且训练效果好，对模型能力破坏极小。
             </p>
             {props.typeTable}
             <p>
-              We also have a built-in OpenAPI playground and docs generator.
+              本训练框架常见训练框架不同，具有算力需求低，训练效果好的优势。甚至单卡即可完成7b模型的强化学习。
             </p>
 
-            <div className="mt-4 flex flex-row items-center gap-1.5 not-prose">
+            <div className="mt-6 flex flex-row items-center gap-1.5 not-prose">
               <Link
-                href="/docs/ui/components/auto-type-table"
-                className={cn(buttonVariants())}
+                href="/docs/y-trainer/introduction"
+                className={cn(buttonVariants({ variant: 'secondary' ,size: 'sm'}))}
               >
-                Type Table
+                训练框架Y-Trainer
               </Link>
               <Link
-                href="/docs/ui/openapi"
-                className={cn(buttonVariants({ variant: 'ghost' }))}
+                href="/docs/y-squeeze/introduction"
+                className={cn(buttonVariants({ variant: 'secondary' ,size: 'sm'}))}
               >
-                OpenAPI Integration
+                分析框架Y-Squeeze
               </Link>
             </div>
           </WhyPanel>
