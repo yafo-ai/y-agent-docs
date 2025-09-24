@@ -99,9 +99,12 @@ function Architecture() {
         </p>
         <h3 className="text-xl font-semibold mb-5">流程搭建 - 流程测试 - 日志分析 - 模型训练</h3>
         <p className="text-fd-muted-foreground mb-6">
-          Fumadocs makes it easy to build beautiful docs, write content, and
-          transform content into data for your React.js framework, from Next.js
-          to React Router.
+          Agentic AI助力企业营收增长与业务变革。
+          <br />
+          <br />
+          从搭建到进化，一站式智能体工厂。
+          <br />
+          不止于搭建，更善于进化！让您的智能体在数据中自我完善。
         </p>
       </div>
       <Image
@@ -481,7 +484,7 @@ function Contributing() {
         敏捷 安全 稳定.
       </h2>
       <p className="mb-4 text-fd-muted-foreground">
-        提供从构思、开发部署、到训练的一整套框架，帮助你的 IT 团队 快速升级现有 业务系统。
+        提供从构思、开发部署、到训练的一整套框架，帮助你的 IT 团队 快速升实现 AI智能集成。
       </p>
       <div className="mb-8 flex flex-row items-center gap-2"></div>
     </div>

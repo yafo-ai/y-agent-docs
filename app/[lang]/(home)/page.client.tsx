@@ -19,6 +19,10 @@ import MainImg from './main.png';
 import NotebookImg from './notebook.png';
 import MainImg3 from './main3.png';
 import MainImg4 from './main4.png';
+import DemoImg1 from './demo1.png';
+import DemoImg2 from './demo2.png';
+import DemoImg3 from './demo3.png';
+import DemoImg4 from './demo4.png';
 import { cva } from 'class-variance-authority';
 
 export function CreateAppAnimation() {
@@ -136,11 +140,13 @@ export function WhyInteractive(props: {
 }) {
   const [active, setActive] = useState(0);
   const items = [
-    '使用简单高效.',
-    '快速分析测试',
-    '高级功能开放.',
-    '自支持模型训练.',
-    '自动化生产语料.',
+    '电商客服助理',
+    '商业客户分析',
+    '法律文件审核',
+    'HR流程自动化',
+    '管理层助手',
+    '自动生产语料',
+    '自主模型训练',
   ];
 
   return (
@@ -190,35 +196,57 @@ export function WhyInteractive(props: {
 
       <div className="flex-1 p-4 border border-fd-primary/10 bg-fd-card/40 rounded-lg shadow-lg">
         {active === 0 ? (
-          <WhyPanel>
-            <h3>We made it simple.</h3>
-            <p>
-              Fumadocs offers native support for Orama and Algolia Search, it is
-              as easy as plugging a route handler. You can also use your own
-              search modal to allow full control over the search UI.
-            </p>
-            {props.codeblockSearchRouter}
-          </WhyPanel>
+          
+            <pre className="p-4 text-[13px]">
+              <Image src={DemoImg1} alt="preview" priority className="rounded-lg mb-4" />
+            </pre>
         ) : null}
 
         {active === 1 ? (
           <WhyPanel>
-            <h3>Tailwind CSS Plugin</h3>
-            <p>
-              Share the same design system cross the docs and your app with
-              Tailwind CSS. Works great with <b>Shadcn UI</b>.
-            </p>
-            {props.codeblockTheme}
-            <Link
-              href="/docs/ui/theme"
-              className={cn(buttonVariants(), 'not-prose')}
-            >
-              See Themes
-            </Link>
+              <Image src={DemoImg2} alt="preview" priority className="rounded-lg mb-4" />
           </WhyPanel>
         ) : null}
 
         {active === 2 ? (
+          <WhyPanel>
+              <Image src={DemoImg3} alt="preview" priority className="rounded-lg mb-4" />          
+          </WhyPanel>
+        ) : null}
+        {active === 3 ? (
+          <WhyPanel>
+              <Image src={DemoImg4} alt="preview" priority className="rounded-lg mb-4" />    
+          </WhyPanel>
+        ) : null}
+        {active === 4 ? (
+          <WhyPanel>
+            <h3>Connect your content and server.</h3>
+
+            <p>
+              React Server Component made it very easy to automate docs. Use
+              server data, server components, and even client components in MDX
+              documents.
+            </p>
+
+            {props.codeblockMdx}
+          </WhyPanel>
+        ) : null}
+        {active === 5 ? (
+          <WhyPanel>
+            <h3>Connect your content and server.</h3>
+
+            <p>
+              React Server Component made it very easy to automate docs. Use
+              server data, server components, and even client components in MDX
+              documents.
+            </p>
+
+            {props.codeblockMdx}
+          </WhyPanel>
+        ) : null}
+        
+        
+        {active === 6 ? (
           <WhyPanel>
             <h3>Never repeat yourself again.</h3>
             <p>
@@ -247,7 +275,7 @@ export function WhyInteractive(props: {
             </div>
           </WhyPanel>
         ) : null}
-        {active === 3 ? (
+        {active === 7 ? (
           <WhyPanel>
             <h3>Interactive docs with React.</h3>
             <p>
@@ -261,19 +289,6 @@ export function WhyInteractive(props: {
             >
               View Components
             </Link>
-          </WhyPanel>
-        ) : null}
-        {active === 4 ? (
-          <WhyPanel>
-            <h3>Connect your content and server.</h3>
-
-            <p>
-              React Server Component made it very easy to automate docs. Use
-              server data, server components, and even client components in MDX
-              documents.
-            </p>
-
-            {props.codeblockMdx}
           </WhyPanel>
         ) : null}
       </div>
