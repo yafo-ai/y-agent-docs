@@ -1,0 +1,20 @@
+---
+title: Y-Squeeze 设置
+description: Y-Squeeze 系统设置指南。
+---
+
+
+
+<Steps>
+<Step title="下载模型">
+您可以从社区下载需要使用的模型源码。注意需要下载
+</Step>
+<Step title="放置模型">
+将您需要加载的模型文件，放在 `D:/llm/` 目录下。当然可以是使用您自己的目录，建立路径中不要有中文和空格。
+</Step>
+<Step title="修改配置">
+然后修改 `src/configs/server_config.py` 文件中的 `MODEL_DIR` 变量为您的模型路径。注意： `MODEL_DIR` 应该是模型所在的上级目录。
+
+如果使用启动器的话，可以在设置界面的 `启动参数` 中，修改模型路径。
+</Step>
+</Steps>
