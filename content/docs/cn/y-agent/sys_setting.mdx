@@ -29,13 +29,58 @@ description: 中文描述
 
 ### 向量数据库配置
 向量数据库配置:
-TODO
-案例：
-Chroma
 
-Milvus
+<Cards>
 
-Faiss
+<Card title="设置vllm向量">
+模型接口格式：vllm
+
+模型名称：bge-m3
+
+API接口地址：http://192.168.50.225:8001/v1/embeddings
+
+APIKEY：留空
+
+</Card>
+
+
+<Card title="设置智谱向量">
+模型接口格式：openai
+
+模型名称：embedding-3
+
+API接口地址：https://open.bigmodel.cn/api/paas/v4/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+
+<Card title="设置火山向量">
+模型接口格式：openai
+
+模型名称：doubao-embedding-text-240715
+
+API接口地址：https://ark.cn-beijing.volces.com/api/v3/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+<Card title="设置openai向量">
+
+模型接口格式：vllm
+
+模型名称：text-embedding-ada-002
+
+API接口地址： https://api.openai.com/v1/embeddings
+
+APIKEY：开放平台申请apikey
+
+</Card>
+
+</Cards>
+
 
 ### 向量模型配置 
 > 注意!修改向量模型后会造成已经生成的所有向量失效，请谨慎操作!
