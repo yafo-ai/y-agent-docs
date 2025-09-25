@@ -4,17 +4,63 @@ description: 这里将提供一些简要的使用说明和入门例子，帮助�
 icon: FastForward 
 ---
 
-## 下载
+## 下载与启动
 
-## 安装
+
+> 建议使用启动器方式
+
+### 1.使用Y-Agent-launch启动器
+
+使用Y-Agent-launch启动器，快捷方便，无需复杂配置，同时不会影响本机Python环境。
+
+<Cards>
+  <Card   title="Gitee下载链接" >
+点击
+  </Card>
+  <Card  title="Github下载链接" >
+点击
+  </Card>  
+</Cards>
+
+下载完成后，解压缩，然后双击 `Y-Agent-launch.exe` 启动程序。
+<Wrapper>
+![](../imgs/y_agent_launch.png)
+</Wrapper>
+
+
+首次启动项目，会自动创建Python嵌入式虚拟环境，并自动下载依赖，请耐心等待。
+
+
+> 如需更复杂设置，可以使用源码方式
+###  2.从源码安装启动
+从Git仓库下载
+<Cards>
+  <Card   title="Gitee下载链接" >
+```
+git clone https://gitee.com/yafo-ai/y-agent-launch.git
+```
+  </Card>
+  <Card  title="Github下载链接" >
+```
+git clone https://github.com/yafo-ai/y-agent-launch.git
+```
+  </Card>  
+</Cards>
+
+运行命令：TODO
 
 ## 配置
+具体配置请参考[系统设置](/docs/y-agent/sys_setting).
 
-
-
-<Banner changeLayout={false}>入门例子，帮助您快速上手</Banner>
 ## 案例教程
-> 以下例子均包含在，系统预设的演示案例中，您可以直接查看。
+
+<Banner changeLayout={false}>
+一些入门教程，帮助您快速上手
+</Banner>
+
+<Banner changeLayout={false}>
+以下例子均包含在，系统预设的演示案例中，您可以直接查看。
+</Banner>
 
 接下来我们将从简单的例子开始，一些复杂的流程也仅仅是这些简单例子的组合。
 ### 例子1、接受和发送消息
@@ -661,9 +707,9 @@ expression的描述为：填写数学表达式
 
 添加知识库: [文档知识库](/docs/y-agent/knowledge_base/text_doc). [Excel知识库](/docs/y-agent/knowledge_base/excel_doc).
 
-在流程中显示引用文档.
+[在流程中显示引用文档](/docs/y-agent/work_flow/wf_nodes/df_tool_node#show_ref_docs).
 
-对回答内容评分
+对回答内容评分 TODO
 
 [用户管理. 角色管理. 权限管理](/docs/y-agent/authorization#新增用户).
 
