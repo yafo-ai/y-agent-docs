@@ -29,7 +29,7 @@ export const linkItems: LinkItemType[] = [
   },
   {
     text: 'DownLoad',
-    url: '/docs/y-agent/quick_start',
+    url: '/docs/download',
     icon: <LayoutTemplate />,
     active: 'url',
   },

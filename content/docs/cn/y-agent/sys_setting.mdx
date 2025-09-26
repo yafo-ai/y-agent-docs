@@ -30,56 +30,16 @@ description: 中文描述
 ### 向量数据库配置
 向量数据库配置:
 
-<Cards>
-
-<Card title="设置vllm向量">
-模型接口格式：vllm
-
-模型名称：bge-m3
-
-API接口地址：http://192.168.50.225:8001/v1/embeddings
-
-APIKEY：留空
-
-</Card>
-
-
-<Card title="设置智谱向量">
-模型接口格式：openai
-
-模型名称：embedding-3
-
-API接口地址：https://open.bigmodel.cn/api/paas/v4/embeddings
-
-APIKEY：开放平台申请apikey
-
-</Card>
-
-
-<Card title="设置火山向量">
-模型接口格式：openai
-
-模型名称：doubao-embedding-text-240715
-
-API接口地址：https://ark.cn-beijing.volces.com/api/v3/embeddings
-
-APIKEY：开放平台申请apikey
-
-</Card>
-
-<Card title="设置openai向量">
-
-模型接口格式：vllm
-
-模型名称：text-embedding-ada-002
-
-API接口地址： https://api.openai.com/v1/embeddings
-
-APIKEY：开放平台申请apikey
-
-</Card>
-
-</Cards>
+目前向量数据库仅支持Chroma,对于Milvus，Faiss等向量数据库将在后续版本中扩展。
+Chroma 支持两种部署方式：
+本地部署：无需修改链接字符串配置，自动启动。
+远程部署：需要在远程服务器部署安装Chroma（chromadb==1.0.17）并启动 chroma run --path /db_path，启动后可以看到端口。参考网址：https://docs.trychroma.com/docs/run-chroma/client-server
+部署完成后需要修改链接字符串,注意链接字符串的格式不要修改，只可以修改参数具体值。
+链接字符串： 
+```json
+{"host":"http://远程IP","port":端口,"param_config":{"collection_metadata":{"hnsw:space":"cosine","hnsw:search_ef":200}}}
+```
+链接字符串中hnsw:space,hnsw:search_ef配置建议使用默认项，如需要修改可以参考：https://docs.trychroma.com/docs/collections/configure
 
 
 ### 向量模型配置 
