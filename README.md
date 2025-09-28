@@ -21,3 +21,4 @@ npm run dev
 npm run build
 npm start
 ```
+致谢：fumadocs项目，本文档使用 [fumadocs](https://fumadocs.dev/) 搭建.
