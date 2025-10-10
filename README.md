@@ -21,6 +21,18 @@ npm run build
 npm start
 ```
 
+相关资料：
+[Y-Agent Studio官方介绍](http://www.y-agent.cn/docs)
+
+[Y-Agent 使用说明](http://www.y-agent.cn/docs/y-agent/quick_start)
+
+[Y-Squeeze 使用说明](http://www.y-agent.cn/docs/y-squeeze/introduction)
+
+[Y-Trainer 介绍](http://www.y-agent.cn/docs/y-trainer/introduction)
+
+[Y-Agent Studio官网](http://www.y-agent.cn)
+=======
+
 致谢：fumadocs项目，本文档使用 [fumadocs](https://fumadocs.dev/) 搭建.
 
 
