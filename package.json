@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && next-sitemap",
+    "postbuild": "next-sitemap",
     "build:docs": "bun ./scripts/generate-docs.ts",
     "build:docs-en": "bun ./scripts/generate-docs-en.ts",
     "dev": "next dev --turbo",
-    "start": "next start -p 80",
+    "start": "next start -p 3000",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
@@ -77,6 +78,7 @@
     "@types/react-dom": "^19.1.9",
     "algoliasearch": "5.36.0",
     "gray-matter": "^4.0.3",
+    "next-sitemap": "^4.2.3",
     "next-validate-link": "^1.5.2",
     "postcss": "^8.5.6",
     "shadcn": "3.1.0",
