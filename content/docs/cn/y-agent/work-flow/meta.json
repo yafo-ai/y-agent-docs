@@ -1,5 +1,5 @@
 {
-    "title": "强化学习",
+    "title": "工作流",
     "description": "yagent",
     "defaultOpen": true,
     "pages": [
@@ -9,8 +9,10 @@
         "prompt-guide",
         "flow-log",
         "debug-flow",
-        "release-flow",
+        "share-flow",
+        "import-export-wf",
         "model-setting",
+        "tips",
         "about-error"
     ]
 }

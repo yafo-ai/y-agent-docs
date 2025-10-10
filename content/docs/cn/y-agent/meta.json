@@ -4,21 +4,21 @@
     "icon": "Airplay",
     "defaultOpen": true,
     "pages": [
-        "no_time_read_this",
-        "quick_start",
+        "no-time-read-this",
+        "quick-start",
         "introduction",
-        "model_setting",
-        "work_flow",
-        "knowledge_base",
-        "about_test",
+        "model-setting",
+        "work-flow",
+        "knowledge-base",
+        "about-test",
         "corpus",
         "rl",
         "merchandise",
-        "sys_setting",
+        "sys-setting",
         "authorization",
         "webapi",
         "demo",
         "faq",
-        "about_error"
+        "about-error"
     ]
 }

@@ -5,12 +5,12 @@
     "pages": [
         "introduction",
         "attention",
-        "token_loss",
-        "token_entropy",
+        "token-loss",
+        "token-entropy",
         "compression",
         "generation",
         "clustering",
-        "model_knowledge_probe",
-        "corpus_quality"
+        "model-knowledge-probe",
+        "corpus-quality"
     ]
   }

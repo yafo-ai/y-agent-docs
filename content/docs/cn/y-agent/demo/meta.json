@@ -3,14 +3,14 @@
     "description": "yagent",
     "defaultOpen": true,
     "pages": [
-        "auto_analyze_logs",
-        "auto_add_test",
-        "auto_add_training_data",
-        "rating_scroe",
-        "flow_log",
-        "debug_flow",
-        "release_flow",
-        "model_setting",
-        "about_error"
+        "auto-analyze-logs",
+        "auto-add-test",
+        "auto-add-training-data",
+        "rating-scroe",
+        "flow-log",
+        "debug-flow",
+        "release-flow",
+        "model-setting",
+        "about-error"
     ]
 }

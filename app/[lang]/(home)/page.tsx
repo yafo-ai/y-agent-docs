@@ -247,7 +247,7 @@ function End() {
         </li>
         <li className="flex flex-row flex-wrap gap-2 mt-auto">
           <a
-            href="/docs/y-agent/quick_start"
+            href="/docs/y-agent/quick-start"
             rel="noreferrer noopener"
           >
             Quick Start

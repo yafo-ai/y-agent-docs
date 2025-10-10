@@ -11,19 +11,19 @@ export const linkItems: LinkItemType[] = [
   {
     icon: <AlbumIcon />,
     text: '快速开始',
-    url: '/docs/y-agent/quick_start',
+    url: '/docs/y-agent/quick-start',
     active: 'nested-url',
     type:'icon',
   },
   {
     text: '快速开始',
-    url: '/docs/y-agent/quick_start',
+    url: '/docs/y-agent/quick-start',
     icon: <LayoutTemplate />,
     active: 'url',
   },
   {
     text: '工作流',
-    url: '/docs/y-agent/work_flow/concept',
+    url: '/docs/y-agent/work-flow/concept',
     icon: <LayoutTemplate />,
     active: 'url',
   },

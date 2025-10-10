@@ -240,13 +240,13 @@ export function WhyInteractive(props: {
             
             <div className="mt-4 flex flex-row items-center gap-1.5 not-prose">
               <Link
-                href="/docs/y-agent/demo/auto_add_training_data"
+                href="/docs/y-agent/demo/auto-add-training-data"
                 className={cn(buttonVariants({ variant: 'primary' ,size: 'sm'}))}
               >
                 自动生产预训练语料
               </Link>
               <Link
-                href="/docs/y-agent/corpus/add_corpus"
+                href="/docs/y-agent/corpus/add-corpus"
                 className={cn(buttonVariants({ variant: 'primary' ,size: 'sm'}))}
               >
                 手工添加语料

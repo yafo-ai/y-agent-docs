@@ -1,0 +1,10 @@
+{
+    "title": "知识库",
+    "description": "yagent",
+    "defaultOpen": true,
+    "pages": [
+        "text-doc",
+        "excel-doc",
+        "auto-add-doc"
+    ]
+}

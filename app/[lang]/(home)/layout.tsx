@@ -75,7 +75,7 @@ export default async function Layout({
                 </NavbarMenuLink>
 
                 <NavbarMenuLink
-                  href="/docs/no_time_read_this"
+                  href="/docs/no-time-read-this"
                   className="lg:col-start-2"
                 >
                   <ComponentIcon className="bg-fd-primary text-fd-primary-foreground p-1 mb-2 rounded-md" />
@@ -86,7 +86,7 @@ export default async function Layout({
                 </NavbarMenuLink>
 
                 <NavbarMenuLink
-                  href="/docs/y-agent/work_flow/wf_nodes/webapi_tool_node"
+                  href="/docs/y-agent/work-flow/wf-nodes/webapi-tool-node"
                   className="lg:col-start-2"
                 >
                   <Server className="bg-fd-primary text-fd-primary-foreground p-1 mb-2 rounded-md" />
@@ -108,7 +108,7 @@ export default async function Layout({
                 </NavbarMenuLink>
 
                 <NavbarMenuLink
-                  href="/docs/y-agent/quick_start"
+                  href="/docs/y-agent/quick-start"
                   className="lg:col-start-3 lg:row-start-2"
                 >
                   <PlusIcon className="bg-fd-primary text-fd-primary-foreground p-1 mb-2 rounded-md" />

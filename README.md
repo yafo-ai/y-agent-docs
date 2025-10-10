@@ -24,7 +24,7 @@ npm start
 相关资料：
 [Y-Agent Studio官方介绍](http://www.y-agent.cn/docs)
 
-[Y-Agent 使用说明](http://www.y-agent.cn/docs/y-agent/quick_start)
+[Y-Agent 使用说明](http://www.y-agent.cn/docs/y-agent/quick-start)
 
 [Y-Squeeze 使用说明](http://www.y-agent.cn/docs/y-squeeze/introduction)
 

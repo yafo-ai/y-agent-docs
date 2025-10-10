@@ -7,7 +7,7 @@
         "---介绍---",
         "markdown",
         "index",
-        "no_time_read_this",
+        "no-time-read-this",
         "download",
         "---Y-Agent---",
         "y-agent",
@@ -19,6 +19,6 @@
         "y-retriever",        
         "license",
         "future",
-        "business_cooperation"
+        "business-cooperation"
     ]
   }

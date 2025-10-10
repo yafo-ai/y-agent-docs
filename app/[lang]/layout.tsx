@@ -8,8 +8,9 @@
     import '@/app/favicon.svg';
     
     export const metadata: Metadata = {
-      title: 'Y-Agent Studio',
-      description: 'Y-Agent Studio 一个企业级Agent开发套件，包含了Agent开发和模型训练',
+      title: 'Y-Agent Studio 多人推荐的智能体开发套件,告别开发瓶颈,高度灵活,快速部署。',
+      description: 'Y-Agent Studio 是一款专业的企业级Agent智能体开发套件，提供从开发、测试到训练、部署的全链路解决方案。立即体验智能体开发新范式。',
+
     };
     
     const geist = Geist({
@@ -73,6 +74,10 @@
         >
           <head>
             <link rel="icon" type="image/svg+xml" href="/cn/docs/icon.png" />
+            <link rel="canonical" href="https://y-agent.cn/" />
+            <link rel="canonical" href="https://y-agent.cn/docs" />
+            <link rel="canonical" href="https://y-agent.cn/docs/no-time-read-this" />
+            <meta name="keywords" content="Y-Agent Studio, AI智能体开发, 企业级Agent, 智能体编排, 有向有环图, Agent自动化测试, 语料生产, 模型训练框架, 多智能体协作, 垂直领域AI, RAG增强, 提示词工程"></meta>
           </head>
           <body className="test relative flex min-h-screen flex-col">
             

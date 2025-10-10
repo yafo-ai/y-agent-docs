@@ -1,0 +1,15 @@
+{
+    "title": "节点与配置",
+    "description": "yagent",
+    "defaultOpen": true,
+    "pages": [
+        "model-node",
+        "executor-node",
+        "batch-node",
+        "df-tool-node",
+        "wf-tool-node",
+        "webapi-tool-node",
+        "mcp-tool-node",
+        "tool-setting"
+    ]
+}
