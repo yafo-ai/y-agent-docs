@@ -547,7 +547,7 @@ function Features() {
       </Feature>
       <Feature
         icon={CpuIcon}
-        subheading="支持 预训练 SPF 强化学习"
+        subheading="支持 预训练 SFT 强化学习"
         heading="解决语料生产难题，快速实现业务需求."
         description="可以通过流程日志生产语料，自动识别问题语料，自动识别模型不懂的知识。"
       >
