@@ -17,3 +17,11 @@ npm run dev
 # 正式环境 
 npm run build
 npm start
+
+# 其他
+
+linux shell 窗口
+screen -S dev
+npm start
+# 按 Ctrl+A 然后按 D 分离会话
+# 重新连接：screen -r dev

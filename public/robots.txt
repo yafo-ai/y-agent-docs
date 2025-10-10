@@ -1,6 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-Host: https://fumadocs.dev
+# Host
+Host: https://y-agent.cn
 
-Sitemap: https://fumadocs.dev/sitemap.xml
+# Sitemaps
+Sitemap: https://y-agent.cn/sitemap.xml

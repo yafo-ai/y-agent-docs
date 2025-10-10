@@ -6,7 +6,7 @@
         "auto_analyze_logs",
         "auto_add_test",
         "auto_add_training_data",
-        "prompt_guide",
+        "rating_scroe",
         "flow_log",
         "debug_flow",
         "release_flow",

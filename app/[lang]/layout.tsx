@@ -85,7 +85,23 @@
             >
               {children}
             </RootProvider>
-
+        <div className="flex flex-col c-footbox items-center text-center text-fd-muted-foreground">
+          <small>
+              <a
+                target="_blank"
+                href="https://beian.miit.gov.cn"
+                
+              >
+                <span>京ICP备2025145222号-1</span>
+              </a>
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <span>
+              © Copyright 向量感知（北京）智能科技有限公司 YAFO 2025.
+              </span>
+          </small>
+        </div>
           </body>
         </html>
       );
