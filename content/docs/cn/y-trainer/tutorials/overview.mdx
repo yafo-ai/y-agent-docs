@@ -1,0 +1,77 @@
+---
+title: 源码说明
+description: Y-Trainer 核心结构与流程
+---
+
+# 🏗️ Y-Trainer 项目概览
+
+## 📁 核心模块结构
+
+Y-Trainer 采用模块化设计，各组件职责清晰，便于维护和扩展：
+
+```
+y-trainer/
+├── training_code/           # 核心训练代码
+│   ├── core/               # 核心功能模块
+│   │   ├── config/         # 配置管理系统
+│   │   ├── data_processer/ # 数据处理与加载
+│   │   ├── model/          # 模型加载与保存
+│   │   ├── trainer/        # 训练器核心逻辑
+│   │   └── log/           # 日志与监控系统
+│   └── utils/             # 通用工具函数
+├── scripts/               # 训练启动脚本
+├── example_dataset/       # 示例数据集与格式参考
+└── resource/             # 资源文件与配置模板
+```
+
+### 模块功能说明
+
+- **config**: 统一管理所有配置参数，支持多层级配置覆盖
+- **data_processer**: 负责数据预处理、批处理和格式转换
+- **model**: 处理模型加载、保存等操作
+- **trainer**: 实现核心训练逻辑，包括前向传播、反向传播和优化
+- **log**: 提供训练过程监控接口、日志记录和可视化支持
+- **utils**: 提供辅助功能
+
+## 🔄 训练流程
+
+Y-Trainer 的训练流程设计清晰，从配置加载到模型保存，每个环节都有明确的职责分工。
+
+### 主训练入口 (`training_code/start_training.py`)
+
+```python
+def main():
+    # 1. 配置注册: 加载并合并默认配置与用户配置
+    model_config, training_config = config_register()
+    
+    # 2. 日志初始化: 设置 ProcessLogger 实例，用于记录训练过程
+    process_logger = ProcessLogger(training_config, model_config)
+    
+    # 3. 分布式初始化: 设置可能存在的分布式环境
+    initialize_distributed(model_config, training_config)
+    
+    # 4. Tokenizer加载
+    tokenizer = load_tokenizer(model_config)
+    
+    # 5. 数据处理
+    data_batcher = data_processer(tokenizer, training_config, model_config)
+    
+    # 6. 模型处理
+    model, batcher, optimizer = model_processer(data_batcher, tokenizer, model_config, training_config)
+    
+    # 7. 训练执行
+    trained_model = training_processer(model, optimizer, batcher, tokenizer, training_config, model_config, process_logger)
+    
+    # 8. 模型保存
+    save_model(trained_model, tokenizer, model_config, training_config)
+```
+
+
+## 🔗 相关文档
+
+- [训练配置项](../config) - 详细的参数配置说明
+- [特色功能](./features) - Y-Trainer 核心功能介绍
+- [快速开始](../quick-start) - 完整的训练流程示例
+- [数据格式说明](../dataset) - 训练数据规范
+
+> 💡 **提示**：了解项目结构后，建议先查看[快速开始](../quick-start)文档，通过实际操作加深理解。

@@ -1,0 +1,119 @@
+---
+title: 快速开始
+description: Y-Trainer 最佳实践示例
+---
+
+
+## 环境准备
+
+### 下载源码
+```shell
+git clone https://github.com/yafo-ai/y-trainer.git
+```
+### 包依赖安装
+
+为便捷训练，我们建议使用以下指令安装依赖包：
+
+```shell
+pip install torch peft>=0.10.0 tensorboard deepspeed==0.17.4 matplotlib
+cd y-trainer
+pip install requirements.txt
+```
+
+**注意事项：**
+- 建议使用Python 3.8+版本
+- 单卡环境可以不安装deepspeed
+- 如需GPU支持，请安装对应版本的PyTorch
+- 由于每个人的硬件环境不同，建议自行安装显卡驱动 CUDA环境和torch，请根据实际情况调整
+
+## 准备数据
+
+具体数据格式参考：[语料数据格式](./dataset).
+
+## 最佳实践示例
+
+我们建议使用以下默认参数进行训练，这些参数在我们实际训练中取得了良好效果：
+
+
+### LoRA微调
+
+单卡LoRA指令微调 (SFT)
+
+```shell
+python -m training_code.start_training \
+    --model_path_to_load /root/autodl-fs/model/test_model_qwen1.5b \
+    --training_type 'sft' \
+    --use_NLIRG \
+    --epoch 3 \
+    --checkpoint_epoch '0,1,2' \
+    --data_path example_dataset/sft_example.json \
+    --output_dir outputdir \
+    --use_lora \
+    --batch_size 1 \
+    --token_batch 10 \
+    --lora_target_modules "q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj"
+```
+
+**参数说明：**
+- `--use_NLIRG`: 核心功能，默认启用。启用智能训练优化算法
+- `--model_path_to_load` 加载的模型目录
+- `--use_lora`: 启用LoRA训练，降低显存需求
+- `--token_batch 10`: 每次反向传播处理的token数量，重要参数不建议更改
+- `--checkpoint_epoch '0,1'`: 在第0轮和第1轮保存检查点
+
+[更多参数说明](./config).
+
+### 预训练
+
+多卡全量继续预训练 (CPT)
+
+```shell
+deepspeed --master_port 29501 --include localhost:0,1 --module training_code.start_training \
+    --model_path_to_load Qwen/Qwen3-8B \
+    --training_type 'cpt' \
+    --use_NLIRG \
+    --batch_size 2 \
+    --use_deepspeed \
+    --pack_length 2048 \
+    --data_path example_dataset/cpt_example.json \
+    --output_dir outputdir \
+    --epoch 3
+```
+
+**参数说明：**
+- `--use_NLIRG`: 核心功能，默认启用。启用智能训练优化算法
+- `--use_deepspeed`: 启用多卡并行训练
+- `--pack_length 2048`: 文本打包长度，提高训练效率
+
+
+
+## 训练场景指南
+
+### CPT: 继续预训练
+
+**适用场景**: 领域迁移、知识补充、模型能力扩展
+
+**使用时机**: 
+- 模型在特定领域表现不佳
+- 需要为模型添加新的专业知识
+- 希望提升模型在特定任务上的表现
+
+**训练建议**:
+- 使用领域相关的文本数据进行训练
+- 训练轮次建议3-5轮
+- 启用NLIRG算法优化训练效果
+
+### SFT: 指令微调
+
+**适用场景**: 问答、摘要、翻译、代码生成、角色扮演等具体任务
+
+**使用时机**:
+- 需要模型遵循特定指令格式
+- 希望模型具备特定对话风格
+- 需要模型完成结构化任务
+
+**训练建议**:
+- 准备高质量的指令-输出对
+- 训练轮次建议2-4轮
+- 启用NLIRG算法提升训练效率
+- 资源有限时可使用LoRA训练

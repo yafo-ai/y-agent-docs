@@ -1,0 +1,107 @@
+---
+title: 参数说明
+description: 训练参数配置项及使用指南。
+---
+
+# 配置类结构
+
+本系统通过四个核心配置类管理所有训练参数：
+
+- **BaseConfig**: 包含配置文件的加载、保存和基础校验功能
+- **ModelConfig**: 定义模型路径、数据精度、训练类型等基本属性
+- **TrainingConfig**: 定义训练过程中的超参数，如学习率、批次大小和训练轮次
+- **LoraConfig**: 定义 LoRA 相关的特定参数
+
+## 🎯 模型配置参数 (ModelConfig)
+
+这些参数定义了训练所需的环境和模型基准，是训练的基础设置。
+
+### 核心参数说明
+
+| 参数名 | 必要性 | 约束条件 | 默认 | 说明 |
+|--------|------|----------|----------|----------|
+| **model_path_to_load** | 必填 | str：hf_model | |预训练模型路径:必须是有效的HuggingFace模型标识符或本地模型路径 |
+| **data_type** | 必填 | `['float16','float32','bfloat16']` | `'bfloat16'` | 训练数据类型:`bfloat16` (推荐) |
+| **training_type** | 必填 | `['cpt','sft']` |  | 训练类型:根据任务选择 |
+| **use_lora** | 可选 | bool | `false` | 是否使用LoRA训练 |
+| **use_deepspeed** | 可选 | bool | `false` | 是否使用DeepSpeed训练:多卡训练时启用 |
+| **system_prompt** | 可选 | str | `"You are a helpful assistant."` | 系统提示词:根据任务定制，也可不设置，默认为示例值 |
+| **enable_gradit_checkpoing** | 可选 | bool | `false` | 启用梯度检查点:显存不足时启用 |
+
+### 💡 重要提示
+
+- **模型路径**：必须是有效的HuggingFace模型标识符或本地模型路径
+- **数据类型选择**：
+  - `bfloat16`：推荐，精度高，显存需求小
+  - `float16`：兼容性好，但精度稍低
+  - `float32`：精度最高，但显存需求大
+- **训练类型**：
+  - `cpt`：继续预训练，用于知识增强
+  - `sft`：指令微调，用于任务适配
+
+## 🚀 训练配置参数 (TrainingConfig)
+
+这些参数控制训练过程中的具体行为和超参数设置。
+
+| 参数名 | 必要性 | 约束条件 | 默认 | 说明 | 
+|--------|------|----------|----------|----------|
+| **use_NLIRG** | 可选 | bool |  `true` | 核心算法建议开启 |
+| **epoch** | 必填 | int | `3` | 训练轮次 |
+| **lr** | 必填 | float | `5e-6` | 学习率 |
+| **batch_size** | 必填 | int | `1` | 批次大小:**一般训练**可设置为非1值，否则请设置为1,此处的batch_size指的是单卡的batch_size |
+| **max_seq_len** | 可选 | int | `2048` | 最大序列长度:若设置此项，则会对输入序列进行截断 |
+| **data_path** | 必填 | str: 目录路径 | `example_dataset/sft_example.json` | 训练数据路径:数据格式请参考[数据格式](dataset) |
+| **output_dir**| 必填 | str: 目录路径 | `example_dataset/output` | 结果输出路径 |
+| **checkpoint_epoch** | 可选 | str | `` | 设置检查点：以 "`,`"分隔，例如：`'0,1'`，表示第n轮保存一次模型，仅限SFT，最后一轮会自动保存 |
+| **token_batch** | sft时必填 | int | `10` | 单次反向传播训练的token数：值越小，训练越准确，但速度越慢，若值大于每一条数据的token数，则为**一般训练** |
+| **pack_length** | cpt时必填 | int | `2048` | 用于将短文本打包，值为打包长度**一般训练** |
+| **enable_gradit_checkpoing** | 可选 | bool | `false` | 启用梯度检查点：可显著降低显存需求，但速度会变慢（大约1.25倍） |
+| **use_tensorboard** | 可选 | bool | `false` | 是否使用TensorBoard记录训练过程 |
+| **tensorboard_path** | 可选 | str: 目录路径 | `example_dataset/tensorboard` | 指定tensorboard输出文件的位置：若设置了使用Tensorboard但未设置此项，则默认将记录文件保存在`output_dir`中 |
+
+## 🔧 LoRA配置参数(LoRAConfig)
+
+LoRA（Low-Rank Adaptation）是一种高效的参数微调方法，可以显著降低训练所需的显存。
+
+**适用场景**：资源有限、需要快速实验、多任务微调
+
+| 参数名 | 说明 | 约束条件 | 默认 | 说明 | 
+|--------|------|----------|----------|----------|
+| **lora_dropout** | LoRA dropout值 | float | `0.1` | - |
+| **lora_path** | PEFT LoRA 模型路径 | str:目录路径 | `` | 加载lora的文件目录（基于lora检查点继续训练是采用此方式），需要设置此项会，加载后无需下面三项 |
+| **lora_target_modules** | LoRA目标模块 | str | `"q_proj,k_proj,v_proj,o_proj"` |以 "`,`"分隔的字符串列表，指向想要训练的模块 |
+| **lora_rank** | LoRA秩大小 | int | `8` | 低秩可能训练效果较差，但能降低显存需求 | 
+| **lora_alpha** | LoRA aplha值 | float | `32` | - |
+
+## 💡 使用注意事项
+
+
+### 配置优先级
+1. **命令行参数** > **默认值**
+2. LoRA相关参数仅在 `use_lora=true` 时生效
+3. DeepSpeed参数仅在 `use_deepspeed=true` 时生效
+4. lora_path：通常用于已经训练一个LoRA，本次训练需要基于该LoRA继续，加载成功后`lora_target_modules``lora_rank``lora_alpha`，会以该LoRA为准，无需再次设置。
+5. lora_target_modules：需要更强效果可加载更多网络层，例如："q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj"
+### 常见配置示例
+
+```bash
+# SFT训练（单卡，LoRA）
+--training_type sft --use_lora --batch_size 1 --token_batch 12
+
+# CPT训练（多卡，全量）
+--training_type cpt --use_deepspeed --batch_size 2 --pack_length 2048
+
+# 高级配置（NLIRG + TensorBoard）
+--use_NLIRG --use_tensorboard --checkpoint_epoch '0,1'
+```
+
+### 配置保存
+
+启动训练的所有配置信息都会被保存到 `output_dir` 中，以便后续检查。
+
+### 🔗 相关文档
+- [快速开始](./quick-start) - 完整的训练流程示例
+- [语料格式说明](./dataset) - 训练数据规范
+- [核心算法](./core-algorithm) - NLIRG算法详解
+
+> 💡 **提示**：建议先使用推荐配置进行实验，再根据具体需求调整参数。

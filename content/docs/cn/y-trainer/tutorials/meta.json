@@ -1,0 +1,10 @@
+{
+    "title": "详细说明",
+    "description": "Training 教程",
+    "defaultOpen": false,
+    "pages": [
+        "overview",
+        "core-algorithm",
+        "features"
+    ]
+  }

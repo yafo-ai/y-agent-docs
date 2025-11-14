@@ -1,9 +1,15 @@
 {
     "title": "说明文档",
     "description": "Training 教程",
-    "icon": "Airplay",
+    "icon": "ChartNetwork",
+    "defaultOpen": true,
     "pages": [
         "introduction",
-        "advanced"
+        "quick-start",
+        "config",
+        "features",
+        "tutorials",
+        "core-algorithm"
+
     ]
   }
