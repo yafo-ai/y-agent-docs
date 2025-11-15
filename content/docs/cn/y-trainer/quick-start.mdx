@@ -39,16 +39,18 @@ pip install requirements.txt
 
 单卡LoRA指令微调 (SFT)
 
+以下为示例，具体可以参考目录：scripts/sft.sh 脚本。Windows环境下请参考sft.bat脚本。
+
 ```shell
 python -m training_code.start_training \
     --model_path_to_load /root/autodl-fs/model/test_model_qwen1.5b \
     --training_type 'sft' \
-    --use_NLIRG \
+    --use_NLIRG 'true' \
     --epoch 3 \
-    --checkpoint_epoch '0,1,2' \
+    --checkpoint_epoch '0,1' \
     --data_path example_dataset/sft_example.json \
     --output_dir outputdir \
-    --use_lora \
+    --use_lora 'true' \
     --batch_size 1 \
     --token_batch 10 \
     --lora_target_modules "q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj"
@@ -67,13 +69,15 @@ python -m training_code.start_training \
 
 多卡全量继续预训练 (CPT)
 
+
+以下为示例，具体可以参考目录：scripts/cpt.sh 脚本。
 ```shell
 deepspeed --master_port 29501 --include localhost:0,1 --module training_code.start_training \
     --model_path_to_load Qwen/Qwen3-8B \
     --training_type 'cpt' \
-    --use_NLIRG \
+    --use_NLIRG 'true'\
     --batch_size 2 \
-    --use_deepspeed \
+    --use_deepspeed 'true' \
     --pack_length 2048 \
     --data_path example_dataset/cpt_example.json \
     --output_dir outputdir \
