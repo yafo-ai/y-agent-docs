@@ -17,7 +17,7 @@ git clone https://github.com/yafo-ai/y-trainer.git
 ```shell
 pip install torch peft>=0.10.0 tensorboard deepspeed==0.17.4 matplotlib
 cd y-trainer
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 **注意事项：**
@@ -39,16 +39,18 @@ pip install requirements.txt
 
 单卡LoRA指令微调 (SFT)
 
+以下为示例，具体可以参考目录：scripts/sft.sh 脚本。Windows环境下请参考sft.bat脚本。
+
 ```shell
 python -m training_code.start_training \
     --model_path_to_load /root/autodl-fs/model/test_model_qwen1.5b \
     --training_type 'sft' \
-    --use_NLIRG \
+    --use_NLIRG 'true' \
     --epoch 3 \
-    --checkpoint_epoch '0,1,2' \
+    --checkpoint_epoch '0,1' \
     --data_path example_dataset/sft_example.json \
     --output_dir outputdir \
-    --use_lora \
+    --use_lora 'true' \
     --batch_size 1 \
     --token_batch 10 \
     --lora_target_modules "q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj"
@@ -67,13 +69,15 @@ python -m training_code.start_training \
 
 多卡全量继续预训练 (CPT)
 
+
+以下为示例，具体可以参考目录：scripts/cpt.sh 脚本。
 ```shell
 deepspeed --master_port 29501 --include localhost:0,1 --module training_code.start_training \
     --model_path_to_load Qwen/Qwen3-8B \
     --training_type 'cpt' \
-    --use_NLIRG \
+    --use_NLIRG 'true'\
     --batch_size 2 \
-    --use_deepspeed \
+    --use_deepspeed 'true' \
     --pack_length 2048 \
     --data_path example_dataset/cpt_example.json \
     --output_dir outputdir \
@@ -117,3 +121,50 @@ deepspeed --master_port 29501 --include localhost:0,1 --module training_code.sta
 - 训练轮次建议2-4轮
 - 启用NLIRG算法提升训练效率
 - 资源有限时可使用LoRA训练
+
+## 📊 TensorBoard 可视化支持
+
+### 启动Tensorboard
+
+```bash
+tensorboard --logdir=/path/to/logs 
+# 启动后，按照命令行提示在浏览器中访问即可实时查看训练情况
+```
+### 效果
+
+![tensorboard example](./tutorials/imgs/tensorboard-example.png)
+
+## 📈 实用工具：语料排序。帮助您快速识别地低质量语料！
+
+### 智能语料难易度评估
+
+此工具基于模型面对语料时熵与交叉熵的整体时序差异来评估语料的难易度，帮助开发者获得难度递增的微调语料。
+
+**应用场景**：
+- 构建渐进式训练数据集
+- 优化模型学习路径
+- 提高训练效率和效果
+
+### 使用示例
+
+```bash
+# 调用排序脚本，对指令微调数据按照与模型的相似度排序
+# 参数说明：
+#   --data_path: 原始指令微调数据 JSON 文件路径
+#   --output_path: 排序后输出的 JSON 文件路径
+#   --model_path: 用于推理和排序的基础模型（如 Qwen3-8B）
+#   --mode: 排序策略，此处为 "similarity_rank"（曲线相似度排序）
+
+cd ~/y-trainer
+
+python -m training_code.utils.schedule.sort \
+    --data_path example_dataset/sft_example.json \
+    --output_path example_dataset/sft_example_out.json \
+    --model_path Qwen3/Qwen3-8B \
+    --mode "similarity_rank"
+```
+
+### 排序策略说明
+
+- **similarity_rank**：基于曲线相似度的排序策略
+- 其他排序策略可根据需求扩展

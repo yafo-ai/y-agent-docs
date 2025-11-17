@@ -86,13 +86,13 @@ LoRA（Low-Rank Adaptation）是一种高效的参数微调方法，可以显著
 
 ```bash
 # SFT训练（单卡，LoRA）
---training_type sft --use_lora --batch_size 1 --token_batch 12
+--training_type sft --use_lora 'true' --batch_size 1 --token_batch 12
 
 # CPT训练（多卡，全量）
---training_type cpt --use_deepspeed --batch_size 2 --pack_length 2048
+--training_type cpt --use_deepspeed 'true' --batch_size 2 --pack_length 2048
 
 # 高级配置（NLIRG + TensorBoard）
---use_NLIRG --use_tensorboard --checkpoint_epoch '0,1'
+--use_NLIRG --use_tensorboard 'true' --checkpoint_epoch '0,1'
 ```
 
 ### 配置保存

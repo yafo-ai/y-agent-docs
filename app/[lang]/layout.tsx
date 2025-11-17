@@ -8,7 +8,7 @@
     import '@/app/favicon.svg';
     
     export const metadata: Metadata = {
-      title: 'Y-Agent Studio 多人推荐的智能体开发套件,告别开发瓶颈,高度灵活,快速部署。',
+      title: 'Y-Agent Studio 开发人员推荐的智能体开发套件,完整开源,高度灵活,私有部署。',
       description: 'Y-Agent Studio 是一款专业的企业级Agent智能体开发套件，提供从开发、测试到训练、部署的全链路解决方案。立即体验智能体开发新范式。',
 
     };

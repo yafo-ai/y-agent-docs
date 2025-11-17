@@ -17,11 +17,11 @@ NLIRG 是我们的核心创新算法，通过实时监测训练样本的难易�
 - 优化训练过程，提高模型泛化能力
 
 **使用方法**：
-只需在训练启动脚本中添加 `--use_NLIRG` 参数即可启用此功能。
+只需在训练启动脚本中添加 `--use_NLIRG 'true'` 参数即可启用此功能。
 
 ```bash
 # 启用NLIRG算法的训练命令示例
-python -m training_code.start_training --use_NLIRG [其他参数...]
+python -m training_code.start_training --use_NLIRG 'true' [其他参数...]
 ```
 
 ## 🛠️ 工具兼容性
@@ -35,7 +35,7 @@ python -m training_code.start_training --use_NLIRG [其他参数...]
 - 简化配置，无需复杂设置
 
 ### LoRA 训练支持
-通过 `--use_lora` 参数即可启用 LoRA 训练，特别适合资源有限的场景。
+通过 `use_lora` 参数即可启用 LoRA 训练，特别适合资源有限的场景。
 
 **优势**：
 - 大幅降低需要训练的参数量
@@ -45,7 +45,7 @@ python -m training_code.start_training --use_NLIRG [其他参数...]
 
 ```bash
 # LoRA训练示例
-python -m training_code.start_training --use_lora [其他参数...]
+python -m training_code.start_training --use_lora 'true' [其他参数...]
 ```
 
 ## 🤖 模型兼容性
@@ -69,15 +69,31 @@ python -m training_code.start_training --use_lora [其他参数...]
 - 支持多种图表类型
 
 **使用方法**：
+
+启动Tensorboard
+
+```bash
+tensorboard --logdir=/path/to/logs 
+# 启动后，按照命令行提示在浏览器中访问即可实时查看训练情况
+```
+
+
+设置训练时TensorBoard记录
+
 ```bash
 # 指定TensorBoard日志路径
-python -m training_code.start_training --use_tensorboard --tensorboard_path /path/to/logs
+python -m training_code.start_training --use_tensorboard 'true' --tensorboard_path /path/to/logs
 
 # 或使用默认路径（输出目录下）
-python -m training_code.start_training --use_tensorboard --output_dir /path/to/output
+python -m training_code.start_training --use_tensorboard 'true' --output_dir /path/to/output
 ```
 
 无论是否指定 TensorBoard 日志路径，系统都会在 `--output_dir` 指定的路径下自动生成训练损失图表。
+
+例子如图:
+![tensorboard example](imgs/tensorboard-example.png)
+
+
 
 ## 📈 实用工具：指令微调语料排序
 

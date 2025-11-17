@@ -115,13 +115,13 @@ Y-Trainer RL框架：
 ### 资源优化建议
 
 **显存不足时**：
-- 启用LoRA训练：`--use_lora`
-- 使用梯度检查点：`--enable_gradit_checkpoing`
+- 启用LoRA训练：`--use_lora 'true'`
+- 使用梯度检查点：`--enable_gradit_checkpoing 'true'`
 - 减小批次大小：`--batch_size 1`
 
 **追求最佳效果**：
-- 启用NLIRG算法：`--use_NLIRG`
-- 使用多卡训练：`--use_deepspeed`
-- 启用可视化：`--use_tensorboard`
+- 启用NLIRG算法：`--use_NLIRG 'true'`
+- 使用多卡训练：`--use_deepspeed 'true'`
+- 启用可视化：`--use_tensorboard 'true'`
 
 > 💡 **提示**：详细配置说明请参考[配置文档](./config)
