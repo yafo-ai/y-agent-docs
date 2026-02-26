@@ -1,0 +1,13 @@
+{
+    "title": "分析工具",
+    "description": "内置分析工具教程",
+    "pages": [
+        "introduction",
+        "attention",
+        "token-loss",
+        "token-entropy",
+        "compression",
+        "generation",
+        "clustering"
+    ]
+  }

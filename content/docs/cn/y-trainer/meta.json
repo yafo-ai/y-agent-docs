@@ -1,15 +1,14 @@
 {
-    "title": "说明文档",
-    "description": "Training 教程",
+    "title": "Y-Trainer",
+    "description": "Y-Trainer 训练框架教程",
     "icon": "ChartNetwork",
     "defaultOpen": true,
     "pages": [
         "introduction",
         "quick-start",
         "config",
-        "features",
+        "dataset",
         "tutorials",
-        "core-algorithm"
-
+        "y-squeeze"
     ]
   }
